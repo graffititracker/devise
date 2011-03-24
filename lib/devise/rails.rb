@@ -6,7 +6,7 @@ Rails.configuration.after_initialize do
 
   # Adds Warden Manager to Rails middleware stack, configuring default devise
   # strategy and also the failure app.
-  Rails.configuration.middleware.use Warden::Manager do |config|
+  Rails.configuration.middleware.insert_before Rails::Rack::Metal, Warden::Manager do |config|
     Devise.configure_warden(config)
   end
 
